@@ -55,5 +55,36 @@ public class Paintings {
             }
         }
     }
+
+    private double FindHighestPrice() {
+        double price = Paintings.get(1).getPrice();
+        for (Painting n : Paintings) {
+            if (n.getPrice() >= price){
+                price = n.getPrice();
+            }
+        }
+        return price;
+    }
+
+    private void PrintMostExpressivePainting(String Name) {
+        for (Painting n : Paintings) {
+            if (n.getPrice() == FindHighestPrice()){
+                n.printInfo();
+            }
+        }
+    }
+
+    private double GetAverageAuthorsPrice(String Name) {
+        double sum = 0;
+        int num = 0;
+        for (Painting n : Paintings) {
+            if (n.getAuthor() == Name){
+                sum += n.getPrice();
+                num++;
+            }
+        }
+        return sum/num;
+    }
+
 }
 
