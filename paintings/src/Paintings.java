@@ -16,12 +16,9 @@ public class Paintings {
         this.Paintings = paintings;
     }
 
-    public void addPainting(Painting Painting) {
-        for (Painting n : Paintings) {
-            if (n.getId() == Painting.getId()) {
-                System.out.println("Картината вече съществува");
-                return;
-            }
+    public void addPainting(Painting Painting) throws Exception {
+        if (Paintings.stream().anyMatch(k -> k.getId() == Painting.getId())) {
+            throw new Exception("Duplicate a picture by id: " + Painting.getId());
         }
         Paintings.add(Painting);
     }
@@ -66,7 +63,7 @@ public class Paintings {
         return price;
     }
 
-    private void PrintMostExpressivePainting(String Name) {
+    public void PrintMostExpressivePainting() {
         for (Painting n : Paintings) {
             if (n.getPrice() == FindHighestPrice()){
                 n.printInfo();
@@ -74,7 +71,7 @@ public class Paintings {
         }
     }
 
-    private double GetAverageAuthorsPrice(String Name) {
+    public double GetAverageAuthorsPrice(String Name) {
         double sum = 0;
         int num = 0;
         for (Painting n : Paintings) {
